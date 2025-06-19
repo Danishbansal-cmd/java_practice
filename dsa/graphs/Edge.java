@@ -1,3 +1,4 @@
+package graphs;
 public class Edge {
     int src;
     int dest;
