@@ -5,6 +5,7 @@ class Hello {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
+        sc.close();
 
         PrintStream out = new PrintStream("output.txt");
         out.println("The number is: " + n);
