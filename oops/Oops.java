@@ -39,6 +39,7 @@ class Student{
 // Abstract class must be declared with an abstract keyword
 // It can have abstract and non-abstract methods
 // It cannot be instantiated
+// // Animal a = new Animal(); cannot instantiate abstract class
 // It can have constructors and static methods also
 // It can have final methods which will force the sub-class not to change the body of the method
 
