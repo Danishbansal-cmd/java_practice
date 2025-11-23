@@ -2,7 +2,7 @@ package graphs;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class MST{
+public class MinimumSpanningTree{
     public static class Pair implements Comparable<Pair>{
         int node;
         int cost;
@@ -17,16 +17,24 @@ public class MST{
             return this.cost - p.cost;
         }
     }
-    // A Minimum Spanning Tree (MST) or minimum weight spanning tree is a subset of
+
+    // A SPANNING TREE (ST) is a subset of
     // the edges of a connected, edge-weighted undirected graph that connects all the
-    // vertices together, without any cycles and with the 
+    // vertices together, without any cycles.
+    // In a graph, there may exist more than one SPANNING TREE.
+
+    // A MINIMUM SPANNING TREE (ST) is same as the spanning tree but with the  
     // minimum possible total edge weight.
 
     // Requirements for MST
     // Undirected, conntected to all vertices, weighted
 
     // Properties of MST
-    // nodes all conntected, no cycyle, edge weight
+    // 1. nodes all conntected, 
+    // 2. no cycyle, 
+    // 3. edge weighted with minimum weight
+    // 4. Any vertex can be reached from any other vertex.
+    // 5. If there are n number of vertices, the spanning tree should have n - 1 number of edges.
 
     // To find the MST of the graph, the "Prims Algorithm" is used
 
@@ -38,19 +46,28 @@ public class MST{
         for(int i = 0; i < length; i++){
             graph[i] = new ArrayList<Edge>();
         }
+        //         1
+        //       / |
+        //     /10 |
+        //   /     |
+        // 0 --15----------- 2
+        //  \      |        /
+        //    \30  |40   / 50
+        //      \  |   /
+        //        3
 
         graph[0].add(new Edge(0, 1, 10));
         graph[0].add(new Edge(0, 2, 15));
         graph[0].add(new Edge(0, 3, 30));
 
         graph[1].add(new Edge(1, 0, 10));
-        graph[1].add(new Edge(1, 3, 40));
+        graph[1].add(new Edge(1, 3, 5));
 
         graph[2].add(new Edge(2, 0, 15));
         graph[2].add(new Edge(2, 3, 50));
 
         graph[3].add(new Edge(3, 0, 30));
-        graph[3].add(new Edge(3, 1, 40));
+        graph[3].add(new Edge(3, 1, 5));
         graph[3].add(new Edge(3, 2, 50));
 
         return graph;
@@ -60,6 +77,11 @@ public class MST{
     // worst case, it traverse to the each edge and add to the PriorityQueue 
     // and then this queuqe sort it, so that is why this is the time-complexity
     // this prims algo
+
+    // Prim’s algorithm:
+    // Starts from a single node.
+    // Grows the Minimum Spanning Tree (MST) by adding one edge at a time — always choosing the smallest weight edge that connects a visited node to an unvisited node.
+    // Uses a priority queue (min-heap) to always pick the smallest edge available.
     public static int primsAlgoUtil(ArrayList<Edge>[] graph, int current, int length){
         boolean[] visited = new boolean[length];
         PriorityQueue<Pair> q = new PriorityQueue<>();

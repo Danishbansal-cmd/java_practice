@@ -22,7 +22,7 @@ interface Mind {
 }
 
 // Mutltiple-level Inheritance can be implemented using interfaces
-// Base-1 class         Base-2 class
+// Base-1 Interface         Base-2 Interface
 //     \                 /
 //       \             /
 //         \         /

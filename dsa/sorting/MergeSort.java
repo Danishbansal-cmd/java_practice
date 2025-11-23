@@ -5,7 +5,7 @@ public class MergeSort {
     // Standard Merge Sort Implementation
     public static void mergeSort(int[] nums, int left, int right) {
         if (left < right) {
-            int mid = (left + right) / 2;
+            int mid = left + (right - left) / 2;
 
             // Sort left half
             mergeSort(nums, left, mid);

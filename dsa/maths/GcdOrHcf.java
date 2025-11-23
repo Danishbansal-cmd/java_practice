@@ -28,4 +28,26 @@ public class GcdOrHcf {
         if(a == 0) return b;
         return a;
     }
+
+    public static int compute_gcd(int a, int b) {
+        // Repeat the process until b becomes 0
+        while (b != 0) {
+
+            // Store b temporarily
+            // If b > a, this effectively swaps a and b in the next step
+            int temp = b;
+
+            // If a > b, then we replace b with a % b
+            // This reduces the problem and moves us closer to the GCD
+            b = a % b;
+
+            // Now assign temp (old b) to a
+            // This shifts the values for the next iteration
+            a = temp;
+        }
+
+        // When b becomes 0, 'a' will contain the GCD
+        return a;
+    }
+
 }
