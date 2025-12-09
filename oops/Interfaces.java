@@ -5,7 +5,6 @@ package oops;
 // Purpose	Define abstract behavior
 
 // PROPERTIES OF INTERFACE
-// . cannot have non-abstract method
 // . All the fields in interfaces are public, static and final by default.
 // . All methods are public & abstract by default.
 // . A class that implements an interface must implement all the methods declared
@@ -15,6 +14,10 @@ package oops;
 interface Robots {
     int legs = 4;
     void walk();
+
+    default void move(){
+        System.out.println("I move and dance");
+    }
 }
 
 interface Mind {
@@ -44,6 +47,7 @@ public class Interfaces {
         MiniRobot m1 = new MiniRobot();
         m1.walk();
         m1.think();
+        m1.move();
         System.out.println(m1.legs);
         // remains final and constant
         System.out.println(Robots.legs);

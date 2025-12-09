@@ -3,13 +3,49 @@ package arrays;
 public class MaximumSubarraySum {
     public static void main(String[] args) {
         int[] nums = new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
-        System.out.println(maxSubArray(nums));
+        // System.out.println(maxSubArray(nums));
+        System.out.println(maxSubArrayPrint(nums));
     }
 
     // Main method to find the maximum subarray sum
     public static int maxSubArray(int[] nums) {
         // return logic1(nums); // Approach 1: Simple running-sum logic
         return logic2(nums); // Approach 2: Optimized DP-based Kadane’s Algorithm
+    }
+
+    // function to print the maximum subarray
+    public static int maxSubArrayPrint(int[] nums){
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+
+
+        int start = 0; //stores the starting index for max subarray
+        int end = 0; //store the end index for max subarray 
+
+        for(int i = 0; i < nums.length; i++){
+            if(sum == 0){
+                start = i;
+            }
+
+            sum += nums[i];
+
+            if(sum > max){
+                max = sum;
+                end = i;
+            }
+
+            if(sum < 0){
+                sum = 0;
+            }
+        }
+
+        System.out.println("maxSubArrayPrint: i:" + start + " j:" + end);
+        for(int i = start; i <= end; i++){
+            System.out.print(nums[i] + " ");
+        }
+        System.out.println();
+
+        return max;
     }
 
     // ---------------------------------------------------------------------------
