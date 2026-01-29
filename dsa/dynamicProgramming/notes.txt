@@ -1,0 +1,10 @@
+methods or dynamic programming
+
+1. Tabulation - (Bottom Up Approach)
+2. Memoization - (Top Down Approach)
+
+
+Memoization - (tend to save the subproblem result in map/table)
+Tabulation - (base case to the required)
+
+

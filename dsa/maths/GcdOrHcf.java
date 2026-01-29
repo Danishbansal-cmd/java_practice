@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class GcdOrHcf {
     public static void main(String[] args) {
-        int[][] hardCordedTestCases = new int[][]{new int[]{1, 2}, new int[]{153, 12}};
+        int[][] hardCordedTestCases = new int[][]{new int[]{2400, 60}, new int[]{24, 60}, new int[]{34324, 234}};
         for(int i = 0; i < hardCordedTestCases.length; i++){
             System.out.println(Arrays.toString(hardCordedTestCases[i]) + ": " +  findGcdOrHcf(hardCordedTestCases[i]));
         }
@@ -38,6 +38,7 @@ public class GcdOrHcf {
             int temp = b;
 
             // If a > b, then we replace b with a % b
+            // and a with b
             // This reduces the problem and moves us closer to the GCD
             b = a % b;
 
@@ -47,6 +48,16 @@ public class GcdOrHcf {
         }
 
         // When b becomes 0, 'a' will contain the GCD
+        return a;
+    }
+
+    static int findGCD(int a, int b){
+        while(a > 0 && b > 0){
+            int temp = a % b;
+            a = b;
+            b = temp;
+        }
+        
         return a;
     }
 
