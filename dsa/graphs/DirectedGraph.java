@@ -1,5 +1,7 @@
 package graphs;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class DirectedGraph {
@@ -65,6 +67,7 @@ public class DirectedGraph {
 
     // to detect if the cycle is detected in the graph
     public static boolean isCycleDetectedUtil(ArrayList<Edge>[] graph, int current, boolean[] visited, boolean[] rec){
+        visited[current] = true;
         rec[current] = true;
 
         for(int i = 0; i < graph[current].size(); i++){
@@ -72,7 +75,6 @@ public class DirectedGraph {
             if(rec[e.dest]){
                 return true;
             }else if(!visited[e.dest]){
-                visited[e.dest] = true;
                 if(isCycleDetectedUtil(graph, e.dest, visited, rec)){
                     return true;
                 }
@@ -98,6 +100,8 @@ public class DirectedGraph {
     }
 
     // Topological Sorting
+    // first check if cycle exists in the graph, if not then only (top sort) is not
+    // otherwise the top sort would not be possible
     // it is used in only for DAG(Directed Acyclic Graphs) Acyclic = Graph with no Cycles
     // DAG = It is linear order of vertices such that every directed edge u -> v
     // the vertex, u comes before v in the order
@@ -126,6 +130,41 @@ public class DirectedGraph {
         while(!s.isEmpty()){
             System.out.print(s.pop() + " ");
         }
+    }
+
+    public static boolean kahnsAlgoDetectCycle(ArrayList<Edge>[] graph){
+        int edges = graph.length;
+        int[] indegree = new int[edges];
+
+        for(ArrayList<Edge> curr : graph){
+            for(int i = 0; i < curr.size(); i++){
+                int nei = curr.get(i).dest;
+                indegree[nei]++;
+            }
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0; i < edges; i++){
+            if(indegree[i] == 0){
+                q.add(i);
+            }
+        }
+        
+        int count = 0;
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            count++;
+
+            for(Edge nei : graph[curr]){
+                indegree[nei.dest]--;
+
+                if(indegree[nei.dest] == 0){
+                    q.add(nei.dest);
+                }
+            }
+        }
+
+        return count != edges;
     }
 
     public static void main(String[] args){
@@ -176,5 +215,19 @@ public class DirectedGraph {
             2 --------> 3 -------> 1
         */
         topSort(graph3, directedGraphLength3);
+        System.out.println();
+
+        System.out.println("Cycle detected (graph2) (Kahn's algo): " + kahnsAlgoDetectCycle(graph2));
+        System.out.println();
+
+        System.out.println("Cycle detected (graph3) (Kahn's algo): " + kahnsAlgoDetectCycle(graph3));
+        System.out.println();
+
+        System.out.println("finding the topological sort order of graph-1");
+        topSort(graph1, directedGraphLength1);
+        System.out.println();
+
+        System.out.println("finding the topological sort order of graph-2");
+        topSort(graph2, directedGraphLength2);
     }
 }

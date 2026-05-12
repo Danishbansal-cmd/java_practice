@@ -91,7 +91,6 @@ public class ShortestPath {
         PriorityQueue<Pair> q = new PriorityQueue<>();
         q.add(new Pair(current, 0));
         int[] distance = new int[length];
-        boolean[] visited = new boolean[length];
 
         for(int i = 0; i < length; i++){
             if(i == current){
@@ -104,20 +103,19 @@ public class ShortestPath {
         while(!q.isEmpty()){
             Pair p = q.remove();
             int node = p.node;
+            int currDist = p.dist;
 
-            if(!visited[node]){
-                visited[node] = true;
+            // IMPORTANT: skip outdated entries
+            if (currDist > distance[node]) continue;
 
-                for(int i = 0; i < graph[node].size(); i++){
-                    Edge e = graph[node].get(i);
-                    int u = e.src;
-                    int v = e.dest;
-                    int wt = e.wt;
+            for(int i = 0; i < graph[node].size(); i++){
+                Edge e = graph[node].get(i);
+                int v = e.dest;
+                int wt = e.wt;
 
-                    if(distance[u] + wt < distance[v]){
-                        distance[v] = distance[u] + wt;
-                        q.add(new Pair(v, distance[v]));
-                    }
+                if(currDist + wt < distance[v]){
+                    distance[v] = currDist + wt;
+                    q.add(new Pair(v, distance[v]));
                 }
             }
         }

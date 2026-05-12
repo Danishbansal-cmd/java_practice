@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+// kmp
+// time complexity (n+m)
 public class KnuthMorrisPratt {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -36,7 +38,7 @@ public class KnuthMorrisPratt {
                 int startingIndex = i - m;
                 foundIndexes.add(startingIndex);
                 j = lps[j - 1];
-            }else{
+            } else{
                 if(i < n && text.charAt(i) != pattern.charAt(j)){
                     if(j != 0){
                         j = lps[j - 1];
@@ -61,15 +63,15 @@ public class KnuthMorrisPratt {
         int[] lps = new int[lpsLength];
         Arrays.fill(lps, 0);
 
-        int i = 1, j = 0;
+        int i = 1, len = 0;
         while(i < lpsLength){
-            if(pattern.charAt(i) == pattern.charAt(j)){
-                j += 1;
-                lps[i] = j;
+            if(pattern.charAt(i) == pattern.charAt(len)){
+                len += 1;
+                lps[i] = len;
                 i += 1;
             } else {
-                if(j != 0){
-                    j = lps[j - 1];
+                if(len != 0){
+                    len = lps[len - 1];
                 }else{
                     lps[i] = 0;
                     i += 1;
