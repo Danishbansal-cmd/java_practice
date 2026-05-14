@@ -258,7 +258,7 @@ public class Traversals {
         if(left == -1) return -1;
 
         int right = isHeightBalanced(root.right);
-        if(left == -1) return -1;
+        if(right == -1) return -1;
 
         if(Math.abs(left - right) > 1) return -1;
 

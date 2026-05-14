@@ -8,7 +8,7 @@ public class Basic {
 
 
         // using Backtracking
-        // printNumsBacktracking(8, 8);
+        printNumsBacktracking(8, 8);
         // printNumsReverseBacktracking(1, 8);
 
 

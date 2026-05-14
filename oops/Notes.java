@@ -13,12 +13,12 @@ package oops;
 
 // Access modifiers in Java
 // 1. public - (can be accessed from anywhere)
-// 2. protected - (can be accessed by anyone or anywhere in the same package, and along with the sub-classes of the
+// 2. protected - (can be accessed by anyone or anywhere in the same package(class and sub-classes), and along with the sub-classes of the
 // other packages)
 // 3. private - (can be accessed in the same class only, no matter the package, sub-class and all
 // only in the same class only)
 // 4. default - (when not applied any access modifier for either class, method or variable, then it uses this
-// the meaning of "default" is that, it is only accessed in the same package,
+// the meaning of "default" is that, it is only accessed in the same package(class and sub-classes),
 // or in the same package it can be accessed by anyone or anywhere)
 
 
@@ -27,10 +27,17 @@ package oops;
 
 
 // ENCAPSULATION
-// in simple terms - bind the data members and methods into a single unit.
+// in simple terms - bind the data members and methods into a single unit, and restricting the direct access to it.
 // Explain - so making the object and the classes is the concept or implementation
 // of encapsulation as we hide the internal methods and working of the things
 // in the class and show only the useful or necessary things to the user
+
+// INHERITANCE
+// Inheritance is one in which a new class is created that inherits the properties of the already exist class.
+
+
+// POLYMORPHISM
+// It is the concept that allows 'many forms', allowing a single method or operators to behave differently based on the object invoking it.
 
 
 // DATA HIDING
