@@ -2,15 +2,15 @@ package hashing;
 
 import java.util.Arrays;
 
-public class HighestLowestFrequencyElement {
+public class MaxFrequencyAfterKOperation {
     public static void main(String[] args) {
         int[] arr = new int[]{1,3,67,8,0,5,3,2,45,78,54,224,57,8,99,74,3,22,23,5,6,89,0,7,654,3,22,3,4,657,8,7,65,4,32,2,45,7};
         int k = 67;
 
-        System.out.println(findTheHighestLowestFrequencyElement(arr, k));
+        System.out.println(maxFrequencyAfterKOperations(arr, k));
     }
 
-    public static int findTheHighestLowestFrequencyElement(int[] arr, int k){
+    public static int maxFrequencyAfterKOperations(int[] arr, int k){
         Arrays.sort(arr);
 
         int left = 0;

@@ -6,7 +6,7 @@ public class GcdOrHcf {
     public static void main(String[] args) {
         int[][] hardCordedTestCases = new int[][]{new int[]{2400, 60}, new int[]{24, 60}, new int[]{34324, 234}};
         for(int i = 0; i < hardCordedTestCases.length; i++){
-            System.out.println(Arrays.toString(hardCordedTestCases[i]) + ": " +  findGcdOrHcf(hardCordedTestCases[i]));
+            System.out.println(Arrays.toString(hardCordedTestCases[i]) + ": " +  findGcdOrHcf(hardCordedTestCases[i][0], hardCordedTestCases[i][1]));
         }
     }
 
@@ -17,9 +17,7 @@ public class GcdOrHcf {
     // Greatest Common Divisor or Highest Common Factor
 
     // time complexity is O(log(base phi)Math.min(a,b))
-    public static int findGcdOrHcf(int[] num){
-        int a = num[0];
-        int b = num[1];
+    public static int findGcdOrHcf(int a, int b){
 
         while(a > 0 && b > 0){
             if(a > b) a = a % b;
