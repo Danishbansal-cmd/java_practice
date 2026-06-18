@@ -2,7 +2,7 @@ package recursion;
 
 public class MultipleRecursionFibonacci {
     public static void main(String[] args){
-        System.out.println(multipleRecursionForFibonacci(3));
+        System.out.println(multipleRecursionForFibonacci(370));
     }
 
     // Time Complexity: O(2^n), where n is the nth number in fibonacci

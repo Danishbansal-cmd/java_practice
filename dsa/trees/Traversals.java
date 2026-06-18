@@ -20,6 +20,8 @@ class Node {
 }
 
 public class Traversals {
+    static int diameter = 0;
+    
     public static void main(String[] args) {
         //         1
         //       /   \
@@ -83,6 +85,9 @@ public class Traversals {
         // Diameter = length of the longest path between any two nodes in the tree
         // prints the number of edges in the longest path or in the diameter
         System.out.print("Diameter: " + diameter(root, 0)[1]);
+        System.out.println();
+        diameter2(root);
+        System.out.print("Diameter: " + diameter);
         System.out.println();
         
         // top/bottom view of the tree
@@ -179,6 +184,20 @@ public class Traversals {
         int maxDiam = Math.max(currDiam, Math.max(left[1], right[1]));
 
         return new int[]{height, maxDiam};
+    }
+
+    // diameter of the tree
+    static int diameter2(Node root){
+        if(root == null){
+            return 0;
+        }
+
+        int left = diameter2(root.left);
+        int right = diameter2(root.right);
+
+        diameter = Math.max(diameter, left + right);
+
+        return 1 + Math.max(left, right);
     }
 
     // prints the top/bottom view of the tree

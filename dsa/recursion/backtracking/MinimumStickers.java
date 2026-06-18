@@ -1,6 +1,7 @@
 package recursion.backtracking;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 // you are given a string of stickers and the target string
 // one can cut out any letter from the stickers and any number of time
@@ -38,40 +39,57 @@ public class MinimumStickers {
         }
 
         int fullMask = (1 << target.length()) - 1;
-        int currentMask = 0;
 
-        return recursion(stickerCounts, currentMask, fullMask, target, targetLength);
+        HashMap<Integer, Integer> memo = new HashMap<>();
+        int currentMask = 0;
+        return dfs(stickerCounts, currentMask, fullMask, target, memo);
     }
 
-    static int recursion(int[][] stickerCounts, int currentMask, int fullMask, String target, int targetLength){
+    static int dfs(int[][] stickerCounts, int currentMask, int fullMask, String target, HashMap<Integer, Integer> memo){
         if(currentMask == fullMask){
             return 0;
         }
 
+        if(memo.containsKey(currentMask)) {
+            return memo.get(currentMask);
+        }
+
         int count = Integer.MAX_VALUE;
-        for(int[] stickerArr : stickerCounts){
+
+        for(int[] sticker : stickerCounts){
+
             int newMask = currentMask;
-            for(int i = 0; i < targetLength; i++){
-                if((newMask & (i<<i)) == 0){
-                    char ch = target.charAt(i);
-                    if(stickerArr[ch - 'a'] >= 1){
-                        stickerArr[ch - 'a']--;
-                        newMask = newMask | (i<<i);
-                    }
+
+            int[] available = sticker.clone();
+
+            for(int i = 0; i < target.length(); i++){
+                if((newMask & (1 << i)) != 0){
+                    continue;
+                }
+
+                char ch = target.charAt(i);
+
+                if(available[ch - 'a'] > 0){
+                    available[ch - 'a']--;
+                    newMask = newMask | (1<<i);
                 }
             }
-            if(currentMask!=newMask){
-                int res = recursion(stickerCounts, currentMask, fullMask, target, targetLength);
-                if(res != -1){
-                    count = Math.min(count, res+1);
-                }
+
+            if(newMask == currentMask) {
+                continue;
+            }
+
+
+            int res = dfs(stickerCounts, newMask, fullMask, target, memo);
+            if(res != -1){
+                count = Math.min(count, res+1);
             }
         }
 
-        if(count == Integer.MAX_VALUE){
-            return -1;
-        }
+        int result = (count == Integer.MAX_VALUE) ? -1 : count;
 
-        return count;
+        memo.put(currentMask, result);
+
+        return result;
     }
 }
