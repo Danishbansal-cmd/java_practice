@@ -1,5 +1,7 @@
 package basics;
 
+import java.util.*;
+
 class Que<T> {
     Node<T> head;
     Node<T> tail;
@@ -71,5 +73,61 @@ public class CreateQueue {
             System.out.print(head.data + " ");
             head = head.next;
         }
+    }
+}
+
+
+class Q<T> {
+    List<T> l;
+
+    Q(){
+        l = new ArrayList<>();
+    }
+
+    void enqueue(T data){
+        l.add(data);
+    }
+
+    T dequeue(){
+        if(isEmpty()){
+            return null;
+        }
+
+        T removedData = l.remove(0);
+
+        return removedData;
+    }
+
+    T peek(){
+        if(isEmpty()){
+            return null;
+        }
+
+        return l.get(0);
+    }
+
+    boolean isEmpty(){
+        return l.size() == 0;
+    }
+}
+
+
+class QLL<T> { // Queue using the LinkedList
+    LinkedList<T> l;
+
+    QLL(){
+        l = new LinkedList<>();
+    }
+
+    void enqueue(T data){
+        l.addLast(data);
+    }
+
+    T dequeue(){
+        return isEmpty() ? null : l.removeFirst();
+    }
+
+    boolean isEmpty(){
+        return l == null;
     }
 }
